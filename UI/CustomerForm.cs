@@ -28,6 +28,11 @@ namespace BookHeaven2.UI
         private void InitializeComponent()
         {
             dataGridViewCustomers = new DataGridView();
+            colId = new DataGridViewTextBoxColumn();
+            colName = new DataGridViewTextBoxColumn();
+            colEmail = new DataGridViewTextBoxColumn();
+            colContact = new DataGridViewTextBoxColumn();
+            colDelete = new DataGridViewButtonColumn();
             btnAddCustomer = new Button();
             txtName = new TextBox();
             txtEmail = new TextBox();
@@ -39,11 +44,6 @@ namespace BookHeaven2.UI
             label2 = new Label();
             lblName = new Label();
             labelEmail = new Label();
-            colId = new DataGridViewTextBoxColumn();
-            colName = new DataGridViewTextBoxColumn();
-            colEmail = new DataGridViewTextBoxColumn();
-            this.colContact = new DataGridViewTextBoxColumn();
-            colDelete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCustomers).BeginInit();
             SuspendLayout();
             // 
@@ -51,13 +51,51 @@ namespace BookHeaven2.UI
             // 
             dataGridViewCustomers.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCustomers.Columns.AddRange(new DataGridViewColumn[] { colId, colName, colEmail, this.colContact, colDelete });
+            dataGridViewCustomers.Columns.AddRange(new DataGridViewColumn[] { colId, colName, colEmail, colContact, colDelete });
             dataGridViewCustomers.Location = new Point(85, 70);
             dataGridViewCustomers.Name = "dataGridViewCustomers";
             dataGridViewCustomers.RowHeadersWidth = 51;
             dataGridViewCustomers.Size = new Size(685, 453);
             dataGridViewCustomers.TabIndex = 0;
             dataGridViewCustomers.CellClick += dataGridViewCustomers_CellClick;
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.MinimumWidth = 6;
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            colId.Width = 125;
+            // 
+            // colName
+            // 
+            colName.HeaderText = "Name";
+            colName.MinimumWidth = 6;
+            colName.Name = "colName";
+            colName.Width = 130;
+            // 
+            // colEmail
+            // 
+            colEmail.HeaderText = "Email";
+            colEmail.MinimumWidth = 6;
+            colEmail.Name = "colEmail";
+            colEmail.Width = 125;
+            // 
+            // colContact
+            // 
+            colContact.HeaderText = "Conatct No";
+            colContact.MinimumWidth = 6;
+            colContact.Name = "colContact";
+            colContact.Width = 125;
+            // 
+            // colDelete
+            // 
+            colDelete.HeaderText = "Delete";
+            colDelete.MinimumWidth = 6;
+            colDelete.Name = "colDelete";
+            colDelete.Text = "Delete";
+            colDelete.UseColumnTextForButtonValue = true;
+            colDelete.Width = 125;
             // 
             // btnAddCustomer
             // 
@@ -158,44 +196,6 @@ namespace BookHeaven2.UI
             labelEmail.TabIndex = 20;
             labelEmail.Text = "Email";
             labelEmail.Click += labelEmail_Click;
-            // 
-            // colId
-            // 
-            colId.HeaderText = "Id";
-            colId.MinimumWidth = 6;
-            colId.Name = "colId";
-            colId.ReadOnly = true;
-            colId.Width = 125;
-            // 
-            // colName
-            // 
-            colName.HeaderText = "Name";
-            colName.MinimumWidth = 6;
-            colName.Name = "colName";
-            colName.Width = 130;
-            // 
-            // colEmail
-            // 
-            colEmail.HeaderText = "Email";
-            colEmail.MinimumWidth = 6;
-            colEmail.Name = "colEmail";
-            colEmail.Width = 125;
-            // 
-            // colContact
-            // 
-            this.colContact.HeaderText = "Conatct No";
-            this.colContact.MinimumWidth = 6;
-            this.colContact.Name = "colContact";
-            this.colContact.Width = 125;
-            // 
-            // colDelete
-            // 
-            colDelete.HeaderText = "Delete";
-            colDelete.MinimumWidth = 6;
-            colDelete.Name = "colDelete";
-            colDelete.Text = "Delete";
-            colDelete.UseColumnTextForButtonValue = true;
-            colDelete.Width = 125;
             // 
             // CustomerForm
             // 

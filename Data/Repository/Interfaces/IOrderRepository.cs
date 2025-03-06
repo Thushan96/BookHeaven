@@ -13,7 +13,7 @@ namespace BookHeaven2.Data.Repository.Interfaces
 
         Task CreateAsync(Order order);
 
-        Task UpdateAsync(Order order);
+        Task<int?> UpdateAsync(Order order);
 
         Task DeleteAsync(Guid orderId);
 

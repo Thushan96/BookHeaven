@@ -10,10 +10,12 @@ namespace BookHeaven2.Data.Models
         public virtual Customer? Customer { get; set; }
 
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();
-        public string? Status { get; set; } // "Pending", "Completed", "Cancelled"
+        public string? Status { get; set; } // "Pending", "Completed"
         public DateTime OrderDate { get; set; }
         public bool? IsDelivery { get; set; }
         public decimal Total { get; set; }
+
+        public decimal Discount { get; set; }
     }
 
     public class OrderItem

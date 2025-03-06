@@ -54,14 +54,17 @@ namespace BookHeaven2.UI
                 var userExist = await _userService.ValidateUserAsync(username, password);
                 if (userExist != null)
                 {
-                    //var bookService = Program.ServiceProvider.GetRequiredService<BookService>();
+                    var bookService = Program.ServiceProvider.GetRequiredService<BookService>();
                     //var bookForm = new BookForm(bookService);
-
                     //bookForm.Show();
-                    
+
                     var customerService = Program.ServiceProvider.GetRequiredService<CustomerService>();
-                    var customerForm = new CustomerForm(customerService);
-                    customerForm.Show();
+                    //var customerForm = new CustomerForm(customerService);
+                    //customerForm.Show();
+
+                    var orderService = Program.ServiceProvider.GetRequiredService<OrderService>();
+                    var orderForm = new OrderManagementForm(orderService, customerService, bookService);
+                    orderForm.Show();
 
                     this.Hide();
                 }

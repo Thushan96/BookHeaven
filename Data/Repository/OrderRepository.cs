@@ -39,12 +39,18 @@ namespace BookHeaven2.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Order order)
+        public async Task<int?> UpdateAsync(Order order)
         {
             if (order == null) throw new ArgumentNullException(nameof(order));
 
-            _context.Orders.Update(order);
-            await _context.SaveChangesAsync();
+            var existingOrder = await _context.Orders.FindAsync(order.Id);
+            if (existingOrder == null)
+            {
+                return null;
+            }
+
+            _context.Entry(existingOrder).CurrentValues.SetValues(order);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid orderId)
@@ -88,24 +94,9 @@ namespace BookHeaven2.Data.Repository
 
                 order.Total = order.Items.Sum(i => i.Quantity * i.Book.Price);
 
+                order.Total -= order.Discount;
+
                 await _context.Orders.AddAsync(order);
-
-                foreach (var orderItem in order.Items)
-                {
-                    var book = await _context.Books.FindAsync(orderItem.BookId);
-                    if (book == null)
-                    {
-                        throw new InvalidOperationException($"Book with ID {orderItem.BookId} not found.");
-                    }
-
-                    if (book.Quantity < orderItem.Quantity)
-                    {
-                        throw new InvalidOperationException($"Not enough stock for {book.Title}. Requested: {orderItem.Quantity}, Available: {book.Quantity}");
-                    }
-
-                    book.Quantity -= orderItem.Quantity;
-                    _context.Books.Update(book);
-                }
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
