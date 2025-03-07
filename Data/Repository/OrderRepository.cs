@@ -39,6 +39,19 @@ namespace BookHeaven2.Data.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<OrderItem?>> GetOrderItemsAsync(Guid orderId)
+        {
+            var orderItems = await _context.Orders
+                .Where(o => o.Id == orderId)
+                .Include(o => o.Items)
+                .SelectMany(o => o.Items)
+                .ToListAsync();
+
+            return orderItems;
+        }
+
+
+
         public async Task<int?> UpdateAsync(Order order)
         {
             if (order == null) throw new ArgumentNullException(nameof(order));

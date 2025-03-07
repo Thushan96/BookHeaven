@@ -22,5 +22,8 @@ namespace BookHeaven2.Data.Repository.Interfaces
         Task<IEnumerable<Order>> GetByStatusAsync(string status);
 
         Task<Order> PlaceOrderAsync(Order order);
+
+        Task<IEnumerable<OrderItem?>> GetOrderItemsAsync(Guid id);
+
     }
 }

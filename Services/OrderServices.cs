@@ -32,6 +32,11 @@ namespace BookHeaven2.Services
             await _orderRepository.CreateAsync(order);
         }
 
+        public async Task<IEnumerable<OrderItem?>> GetOrderItemsAsync(Guid orderId)
+        {
+            return await _orderRepository.GetOrderItemsAsync(orderId);
+        }
+
         public async Task UpdateOrderAsync(Order order)
         {
             if (order == null) throw new ArgumentNullException(nameof(order));

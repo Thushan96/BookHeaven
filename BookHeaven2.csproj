@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="UI\StaffForm.cs" />
+    <Compile Update="UI\SupplierForm - Copy.cs" />
+    <Compile Update="UI\SupplierForm.cs" />
     <Compile Update="UI\CustomerForm.cs" />
   </ItemGroup>
 

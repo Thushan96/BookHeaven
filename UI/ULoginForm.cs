@@ -64,7 +64,14 @@ namespace BookHeaven2.UI
 
                     var orderService = Program.ServiceProvider.GetRequiredService<OrderService>();
                     var orderForm = new OrderManagementForm(orderService, customerService, bookService);
-                    orderForm.Show();
+                    //orderForm.Show();
+
+                    var supplierService = Program.ServiceProvider.GetRequiredService<SupplierService>();
+                    var supplierForm = new SupplierForm(supplierService, bookService);
+                    //supplierForm.Show();
+
+                    var salesForm = new SalesForm(orderService);
+                    salesForm.Show();
 
                     this.Hide();
                 }

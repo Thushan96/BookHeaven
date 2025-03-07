@@ -24,6 +24,7 @@ namespace BookHeaven2.Data.Repository
 
         public async Task<IEnumerable<Supplier>> GetAllAsync()
         {
+            
             return await _context.Suppliers.Include(s => s.Books).ToListAsync();
         }
 
