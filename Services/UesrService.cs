@@ -49,11 +49,14 @@ namespace BookHeaven2.Services
             await _userRepository.CreateAsync(user);
         }
 
-        public async Task UpdateUserAsync(AppUser user)
+        public async Task<int?> UpdateUserAsync(AppUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
+            if (user.PasswordHash != null || user.PasswordHash != "") {
+                user.PasswordHash = HashPassword(user.PasswordHash);
+            }
 
-            await _userRepository.UpdateAsync(user);
+            return await _userRepository.UpdateAsync(user);
         }
 
         public async Task DeleteUserAsync(Guid userId)

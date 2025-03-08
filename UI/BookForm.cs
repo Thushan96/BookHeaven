@@ -28,6 +28,14 @@ namespace BookHeaven2.UI
         private void InitializeComponent()
         {
             dataGridViewBooks = new DataGridView();
+            colId = new DataGridViewTextBoxColumn();
+            colTitle = new DataGridViewTextBoxColumn();
+            colAuthor = new DataGridViewTextBoxColumn();
+            colGenre = new DataGridViewTextBoxColumn();
+            colISBN = new DataGridViewTextBoxColumn();
+            colPrice = new DataGridViewTextBoxColumn();
+            colQuantity = new DataGridViewTextBoxColumn();
+            colDelete = new DataGridViewButtonColumn();
             btnAddBook = new Button();
             txtTitle = new TextBox();
             txtAuthor = new TextBox();
@@ -45,14 +53,6 @@ namespace BookHeaven2.UI
             btnUpdate = new Button();
             txtId = new TextBox();
             label2 = new Label();
-            this.colId = new DataGridViewTextBoxColumn();
-            colTitle = new DataGridViewTextBoxColumn();
-            colAuthor = new DataGridViewTextBoxColumn();
-            colGenre = new DataGridViewTextBoxColumn();
-            colISBN = new DataGridViewTextBoxColumn();
-            colPrice = new DataGridViewTextBoxColumn();
-            colQuantity = new DataGridViewTextBoxColumn();
-            colDelete = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
             // 
@@ -60,13 +60,72 @@ namespace BookHeaven2.UI
             // 
             dataGridViewBooks.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { this.colId, colTitle, colAuthor, colGenre, colISBN, colPrice, colQuantity, colDelete });
+            dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colAuthor, colGenre, colISBN, colPrice, colQuantity, colDelete });
             dataGridViewBooks.Location = new Point(40, 70);
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersWidth = 51;
             dataGridViewBooks.Size = new Size(1067, 469);
             dataGridViewBooks.TabIndex = 0;
             dataGridViewBooks.CellClick += dataGridViewBooks_CellClick;
+            // 
+            // colId
+            // 
+            colId.HeaderText = "Id";
+            colId.MinimumWidth = 6;
+            colId.Name = "colId";
+            colId.ReadOnly = true;
+            colId.Width = 125;
+            // 
+            // colTitle
+            // 
+            colTitle.HeaderText = "Title";
+            colTitle.MinimumWidth = 6;
+            colTitle.Name = "colTitle";
+            colTitle.Width = 130;
+            // 
+            // colAuthor
+            // 
+            colAuthor.HeaderText = "Author";
+            colAuthor.MinimumWidth = 6;
+            colAuthor.Name = "colAuthor";
+            colAuthor.Width = 125;
+            // 
+            // colGenre
+            // 
+            colGenre.HeaderText = "Genre";
+            colGenre.MinimumWidth = 6;
+            colGenre.Name = "colGenre";
+            colGenre.Width = 125;
+            // 
+            // colISBN
+            // 
+            colISBN.HeaderText = "ISBN";
+            colISBN.MinimumWidth = 6;
+            colISBN.Name = "colISBN";
+            colISBN.Width = 125;
+            // 
+            // colPrice
+            // 
+            colPrice.HeaderText = "Price";
+            colPrice.MinimumWidth = 6;
+            colPrice.Name = "colPrice";
+            colPrice.Width = 125;
+            // 
+            // colQuantity
+            // 
+            colQuantity.HeaderText = "Quantity";
+            colQuantity.MinimumWidth = 6;
+            colQuantity.Name = "colQuantity";
+            colQuantity.Width = 135;
+            // 
+            // colDelete
+            // 
+            colDelete.HeaderText = "Delete";
+            colDelete.MinimumWidth = 6;
+            colDelete.Name = "colDelete";
+            colDelete.Text = "Delete";
+            colDelete.UseColumnTextForButtonValue = true;
+            colDelete.Width = 125;
             // 
             // btnAddBook
             // 
@@ -216,65 +275,6 @@ namespace BookHeaven2.UI
             label2.TabIndex = 18;
             label2.Text = "Id";
             // 
-            // colId
-            // 
-            this.colId.HeaderText = "Id";
-            this.colId.MinimumWidth = 6;
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Width = 125;
-            // 
-            // colTitle
-            // 
-            colTitle.HeaderText = "Title";
-            colTitle.MinimumWidth = 6;
-            colTitle.Name = "colTitle";
-            colTitle.Width = 130;
-            // 
-            // colAuthor
-            // 
-            colAuthor.HeaderText = "Author";
-            colAuthor.MinimumWidth = 6;
-            colAuthor.Name = "colAuthor";
-            colAuthor.Width = 125;
-            // 
-            // colGenre
-            // 
-            colGenre.HeaderText = "Genre";
-            colGenre.MinimumWidth = 6;
-            colGenre.Name = "colGenre";
-            colGenre.Width = 125;
-            // 
-            // colISBN
-            // 
-            colISBN.HeaderText = "ISBN";
-            colISBN.MinimumWidth = 6;
-            colISBN.Name = "colISBN";
-            colISBN.Width = 125;
-            // 
-            // colPrice
-            // 
-            colPrice.HeaderText = "Price";
-            colPrice.MinimumWidth = 6;
-            colPrice.Name = "colPrice";
-            colPrice.Width = 125;
-            // 
-            // colQuantity
-            // 
-            colQuantity.HeaderText = "Quantity";
-            colQuantity.MinimumWidth = 6;
-            colQuantity.Name = "colQuantity";
-            colQuantity.Width = 135;
-            // 
-            // colDelete
-            // 
-            colDelete.HeaderText = "Delete";
-            colDelete.MinimumWidth = 6;
-            colDelete.Name = "colDelete";
-            colDelete.Text = "Delete";
-            colDelete.UseColumnTextForButtonValue = true;
-            colDelete.Width = 125;
-            // 
             // BookForm
             // 
             ClientSize = new Size(1373, 566);
@@ -359,11 +359,11 @@ namespace BookHeaven2.UI
                 SupplierId = null
             };
 
-           var updated= await _bookService.UpdateBook(newBook);
+            var updated = await _bookService.UpdateBook(newBook);
             if (updated != null && updated > 0)
             {
                 MessageBox.Show("Book updated successfully");
-                 BookForm_Load(sender, e);
+                BookForm_Load(sender, e);
                 clearTextBoxes();
             }
             else
@@ -373,6 +373,11 @@ namespace BookHeaven2.UI
         }
 
         private void lblQty_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewBooks_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

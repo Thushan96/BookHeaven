@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BookHeaven2.Data.Models;
 using BookHeaven2.Data.Repository.Interfaces;
+using BookHeaven2.Data.Dto;
 
 namespace BookHeaven2.Data.Repository
 {
@@ -69,6 +70,19 @@ namespace BookHeaven2.Data.Repository
             return await _context.Books
                 .Where(b => b.SupplierId == supplierId)
                 .Include(b => b.Supplier)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<BookInventory>> GetInventoryAsync()
+        {
+            return await _context.Books
+                .OrderByDescending(b => b.Quantity)
+                .Select(b => new BookInventory
+                {
+                    BookId = b.Id,
+                    Title = b.Title,
+                    Stock = b.Quantity
+                })
                 .ToListAsync();
         }
 

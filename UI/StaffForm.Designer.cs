@@ -34,5 +34,7 @@ namespace BookHeaven2.UI
         private DataGridViewTextBoxColumn colRole;
         private DataGridViewButtonColumn colDelete;
         private ComboBox cmbRole;
+        private Label lblPassword;
+        private TextBox txtPassord;
     }
 }

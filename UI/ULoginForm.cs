@@ -71,8 +71,15 @@ namespace BookHeaven2.UI
                     //supplierForm.Show();
 
                     var salesForm = new SalesForm(orderService);
-                    salesForm.Show();
 
+                    var userService = Program.ServiceProvider.GetRequiredService<UserService>();
+                    var staffForm = new StaffForm(userService);
+                    //salesForm.Show();
+
+                    //staffForm.Show();
+
+                    var dashboard = new AdminDashboard(bookService, customerService, orderService);
+                    dashboard.Show();
                     this.Hide();
                 }
                 else

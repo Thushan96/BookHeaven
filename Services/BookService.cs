@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BookHeaven2.Data.Dto;
 using BookHeaven2.Data.Models;
 using BookHeaven2.Data.Repository.Interfaces;
 
@@ -54,6 +55,11 @@ namespace BookHeaven2.Services
         public async Task<IEnumerable<Book>> GetBooksBySupplier(Guid supplierId)
         {
             return await bookRepository.GetBooksBySupplierAsync(supplierId);
+        }
+
+        public async Task<IEnumerable<BookInventory>> GetInventory()
+        {
+            return await bookRepository.GetInventoryAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BookHeaven2.Data.Dto;
 using BookHeaven2.Data.Models;
 using BookHeaven2.Data.Repository.Interfaces;
 
@@ -64,6 +65,21 @@ namespace BookHeaven2.Services
             if (order == null) throw new ArgumentNullException(nameof(order));
 
             return await _orderRepository.PlaceOrderAsync(order);
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            return await _orderRepository.GetOrdersByDateRangeAsync(startDate, endDate);
+        }
+
+        public async Task<IEnumerable<BookSales>> GetBestSellingBooksAsync()
+        {
+            return await _orderRepository.GetBestSellingBooksAsync();
+        }
+
+        public async Task<IEnumerable<BestCustomer>> GetBestCustomersAsync()
+        {
+            return await _orderRepository.GetBestCustomersAsync();
         }
     }
 }

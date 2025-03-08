@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BookHeaven2.Data.Models;
 using BookHeaven2.Data.Repository.Interfaces;
+using BookHeaven2.Data.Dto;
 
 namespace BookHeaven2.Data.Repository
 {
@@ -122,6 +123,48 @@ namespace BookHeaven2.Data.Repository
                 throw;
             }
         }
+
+        public async Task<IEnumerable<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            return await _context.Orders
+                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
+                .Include(o => o.Items)
+                    .ThenInclude(oi => oi.Book)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<BookSales>> GetBestSellingBooksAsync()
+        {
+            return await _context.Orders
+                .SelectMany(o => o.Items) 
+                .GroupBy(oi => oi.BookId)
+                .Select(group => new BookSales
+                {
+                    BookId = group.Key,
+                    Title = group.First().Book.Title,
+                    TotalSold = group.Sum(oi => oi.Quantity)
+                })
+                .OrderByDescending(b => b.TotalSold)
+                .Take(10)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<BestCustomer>> GetBestCustomersAsync()
+        {
+            return await _context.Orders
+                .GroupBy(o => o.CustomerId)
+                .Select(group => new BestCustomer
+                {
+                    CustomerId = group.Key,
+                    Name = group.First().Customer.Name,
+                    TotalSpent = group.Sum(o => o.Total)
+                })
+                .OrderByDescending(c => c.TotalSpent)
+                .Take(10)
+                .ToListAsync();
+        }
+
+
 
     }
 }

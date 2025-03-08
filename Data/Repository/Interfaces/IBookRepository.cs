@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookHeaven2.Data.Dto;
 using BookHeaven2.Data.Models;
 
 namespace BookHeaven2.Data.Repository.Interfaces
@@ -24,6 +25,8 @@ namespace BookHeaven2.Data.Repository.Interfaces
         Task UpdateStockAsync(Guid bookId, int newQuantity);
 
         Task<IEnumerable<Book>> GetBooksBySupplierAsync(Guid supplierId);
+
+        Task<IEnumerable<BookInventory>> GetInventoryAsync();
 
     }
 }

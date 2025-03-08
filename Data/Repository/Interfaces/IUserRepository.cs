@@ -17,7 +17,7 @@ namespace BookHeaven2.Data.Repository.Interfaces
 
         Task CreateAsync(AppUser user);
 
-        Task UpdateAsync(AppUser user);
+        Task<int?> UpdateAsync(AppUser user);
 
         Task DeleteAsync(Guid userId);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BookHeaven2.Data.Dto;
 using BookHeaven2.Data.Models;
 
 namespace BookHeaven2.Data.Repository.Interfaces
@@ -24,6 +25,12 @@ namespace BookHeaven2.Data.Repository.Interfaces
         Task<Order> PlaceOrderAsync(Order order);
 
         Task<IEnumerable<OrderItem?>> GetOrderItemsAsync(Guid id);
+
+        Task<IEnumerable<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate);
+
+        Task<IEnumerable<BookSales>> GetBestSellingBooksAsync();
+
+        Task<IEnumerable<BestCustomer>> GetBestCustomersAsync();
 
     }
 }

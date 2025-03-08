@@ -42,12 +42,16 @@ namespace BookHeaven2.Data.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(AppUser user)
+        public async Task<int?> UpdateAsync(AppUser user)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
+            var existingUser = await _context.Users.FindAsync(user.Id);
+            if (existingUser == null)
+            {
+                return null;
+            }
 
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            _context.Entry(existingUser).CurrentValues.SetValues(user);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid userId)
