@@ -50,5 +50,6 @@ namespace BookHeaven2.UI
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private Button btnBack;
     }
 }

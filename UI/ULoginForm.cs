@@ -49,38 +49,23 @@ namespace BookHeaven2.UI
             if (user != null)
             {
                 lblError.Text = "";
-                MessageBox.Show("Login successful!");
 
                 var userExist = await _userService.ValidateUserAsync(username, password);
                 if (userExist != null)
                 {
-                    var bookService = Program.ServiceProvider.GetRequiredService<BookService>();
-                    //var bookForm = new BookForm(bookService);
-                    //bookForm.Show();
+                    if (userExist.Role == UserRole.Admin) {
+                        var adminForm = new AdminForm();
+                        adminForm.Show();
+                        this.Hide();
+                    }
 
-                    var customerService = Program.ServiceProvider.GetRequiredService<CustomerService>();
-                    //var customerForm = new CustomerForm(customerService);
-                    //customerForm.Show();
+                    if (userExist.Role == UserRole.SalesClerk) {
+                        var clerkForm = new ClerkForm();
+                        clerkForm.Show();
+                        this.Hide();
+                    }
 
-                    var orderService = Program.ServiceProvider.GetRequiredService<OrderService>();
-                    var orderForm = new OrderManagementForm(orderService, customerService, bookService);
-                    //orderForm.Show();
-
-                    var supplierService = Program.ServiceProvider.GetRequiredService<SupplierService>();
-                    var supplierForm = new SupplierForm(supplierService, bookService);
-                    //supplierForm.Show();
-
-                    var salesForm = new SalesForm(orderService);
-
-                    var userService = Program.ServiceProvider.GetRequiredService<UserService>();
-                    var staffForm = new StaffForm(userService);
-                    //salesForm.Show();
-
-                    //staffForm.Show();
-
-                    var dashboard = new AdminDashboard(bookService, customerService, orderService);
-                    dashboard.Show();
-                    this.Hide();
+                    
                 }
                 else
                 {
@@ -122,6 +107,11 @@ namespace BookHeaven2.UI
         }
 
         private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

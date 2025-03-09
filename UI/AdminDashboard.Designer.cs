@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             lblDashboard = new Label();
             splitter1 = new Splitter();
             btnSummary = new Button();
@@ -42,6 +42,8 @@
             btnMonth = new Button();
             dgvReports = new DataGridView();
             label1 = new Label();
+            btnBack = new Button();
+            btnDownload = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvReports).BeginInit();
             SuspendLayout();
             // 
@@ -49,7 +51,7 @@
             // 
             lblDashboard.AutoSize = true;
             lblDashboard.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDashboard.Location = new Point(628, 9);
+            lblDashboard.Location = new Point(716, 20);
             lblDashboard.Name = "lblDashboard";
             lblDashboard.Size = new Size(114, 28);
             lblDashboard.TabIndex = 0;
@@ -60,7 +62,7 @@
             splitter1.BackColor = SystemColors.Info;
             splitter1.Location = new Point(0, 0);
             splitter1.Name = "splitter1";
-            splitter1.Size = new Size(239, 506);
+            splitter1.Size = new Size(239, 551);
             splitter1.TabIndex = 1;
             splitter1.TabStop = false;
             // 
@@ -139,28 +141,28 @@
             // 
             // dgvReports
             // 
-            dataGridViewCellStyle4.BackColor = Color.LightBlue;
-            dgvReports.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = Color.LightBlue;
+            dgvReports.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvReports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvReports.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvReports.BackgroundColor = SystemColors.Control;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = Color.LightGray;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvReports.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.LightGray;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvReports.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.Window;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle6.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            dgvReports.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvReports.DefaultCellStyle = dataGridViewCellStyle3;
             dgvReports.Location = new Point(413, 88);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
@@ -180,11 +182,37 @@
             label1.TabIndex = 10;
             label1.Text = "Reports";
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(1129, 487);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 11;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
+            // btnDownload
+            // 
+            btnDownload.BackColor = SystemColors.ScrollBar;
+            btnDownload.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDownload.Location = new Point(959, 487);
+            btnDownload.Name = "btnDownload";
+            btnDownload.Size = new Size(107, 37);
+            btnDownload.TabIndex = 12;
+            btnDownload.Text = "Download";
+            btnDownload.UseVisualStyleBackColor = false;
+            btnDownload.Click += btnDownload_Click;
+            // 
             // AdminDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1246, 506);
+            ClientSize = new Size(1246, 551);
+            Controls.Add(btnDownload);
+            Controls.Add(btnBack);
             Controls.Add(label1);
             Controls.Add(dgvReports);
             Controls.Add(btnMonth);
@@ -216,5 +244,7 @@
         private Button btnMonth;
         private DataGridView dgvReports;
         private Label label1;
+        private Button btnBack;
+        private Button btnDownload;
     }
 }

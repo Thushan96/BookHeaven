@@ -47,12 +47,10 @@ namespace BookHeaven2.UI
 
         private void btnSummary_Click(object sender, EventArgs e)
         {
-            // Show Today, Week, Month buttons
             btnToday.Visible = true;
             btnWeek.Visible = true;
             btnMonth.Visible = true;
 
-            // Hide any table from previous selections
             ClearTables();
         }
 
@@ -65,7 +63,7 @@ namespace BookHeaven2.UI
             var bestSellingBooks = await orderService.GetBestSellingBooksAsync();
             dgvReports.Visible = true;
             dgvReports.DataSource = bestSellingBooks;
-
+            btnDownload.Visible = true;
         }
 
         private async void Inventory_Click(object sender, EventArgs e)
@@ -76,6 +74,7 @@ namespace BookHeaven2.UI
             var inventory = await bookService.GetInventory();
             dgvReports.Visible = true;
             dgvReports.DataSource = inventory;
+            btnDownload.Visible = true;
 
         }
 
@@ -87,6 +86,7 @@ namespace BookHeaven2.UI
             var bestCustomers = await orderService.GetBestCustomersAsync();
             dgvReports.Visible = true;
             dgvReports.DataSource = bestCustomers;
+            btnDownload.Visible = true;
 
         }
 
@@ -101,6 +101,7 @@ namespace BookHeaven2.UI
         {
             dgvReports.Visible = false;
             dgvReports.DataSource = null;
+            btnDownload.Visible = false;
         }
 
         private async Task LoadOrdersIntoGrid(DateTime startDate, DateTime endDate)
@@ -114,6 +115,71 @@ namespace BookHeaven2.UI
                 Date = o.OrderDate.ToString("yyyy-MM-dd"),
                 TotalAmount = o.Total
             }).ToList();
+            btnDownload.Visible = true;
+        }
+
+        private void GenerateReport()
+        {
+            // Get the Downloads folder path
+            var downloadsFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+            var reportPath = System.IO.Path.Combine(downloadsFolder, "Report.pdf");
+
+            // Access the rows from the DataGridView
+            var rows = dgvReports.Rows;
+
+            var document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4);
+
+            using (var stream = new System.IO.FileStream(reportPath, System.IO.FileMode.Create))
+            {
+                var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, stream);
+
+                document.Open();
+
+                document.Add(new iTextSharp.text.Paragraph("Sales Report"));
+                document.Add(new iTextSharp.text.Paragraph($"Generated on: {DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}"));
+
+                var table = new iTextSharp.text.pdf.PdfPTable(dgvReports.ColumnCount)
+                {
+                    WidthPercentage = 100
+                };
+
+                foreach (DataGridViewColumn column in dgvReports.Columns)
+                {
+                    table.AddCell(new iTextSharp.text.Phrase(column.HeaderText));
+                }
+
+                foreach (DataGridViewRow row in rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        table.AddCell(cell.Value?.ToString() ?? string.Empty);
+                    }
+                }
+
+                document.Add(table);
+
+                document.Close();
+            }
+
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(reportPath)
+            {
+                UseShellExecute = true
+            });
+        }
+
+
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
+        }
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            GenerateReport();
+
         }
     }
 }

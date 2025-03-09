@@ -9,11 +9,14 @@ namespace BookHeaven2.UI
     public partial class BookForm : Form
     {
         private readonly BookService _bookService;
+        private readonly UserRole userRole;
 
-        public BookForm(BookService bookService)
+        public BookForm(BookService bookService, UserRole userRole)
         {
             InitializeComponent();
             _bookService = bookService;
+            this.userRole = userRole;
+
         }
 
         private async void BookForm_Load(object sender, EventArgs e)
@@ -31,6 +34,12 @@ namespace BookHeaven2.UI
                     book.Price,
                     book.Quantity
                 );
+            }
+            if (userRole == UserRole.SalesClerk)
+            {
+                btnAddBook.Enabled = false;
+                btnUpdate.Enabled = false;
+                dataGridViewBooks.Columns["colDelete"].Visible = false;
             }
         }
 
@@ -132,5 +141,6 @@ namespace BookHeaven2.UI
         private DataGridViewTextBoxColumn colPrice;
         private DataGridViewTextBoxColumn colQuantity;
         private DataGridViewButtonColumn colDelete;
+        private Button btnBack;
     }
 }

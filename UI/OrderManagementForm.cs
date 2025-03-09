@@ -22,9 +22,10 @@ namespace BookHeaven2.UI
         private readonly BookService _bookService;
         private Order _currentOrder;
         private List<OrderItem> _orderItems = new List<OrderItem>();
+        private readonly UserRole role;
 
 
-        public OrderManagementForm(OrderService orderService, CustomerService customerService, BookService bookService)
+        public OrderManagementForm(OrderService orderService, CustomerService customerService, BookService bookService, UserRole role)
         {
             InitializeComponent();
             _orderService = orderService;
@@ -38,6 +39,7 @@ namespace BookHeaven2.UI
                 Discount = 0
             };
             InitializeOrder();
+            this.role = role;
         }
 
         private void LoadOrderStatus()
@@ -444,6 +446,21 @@ namespace BookHeaven2.UI
             {
                 _currentOrder.Status = cmbStatus.SelectedItem.ToString();
             }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            var clerkForm = new ClerkForm();
+            if (role == UserRole.Admin)
+            {
+                adminForm.Show();
+            }
+            else
+            {
+                clerkForm.Show();
+            }
+            this.Hide();
         }
     }
 }

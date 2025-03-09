@@ -1,4 +1,5 @@
 ﻿using BookHeaven2.Data.Models;
+using System.Data;
 using System.Windows.Forms;
 
 namespace BookHeaven2.UI
@@ -53,6 +54,7 @@ namespace BookHeaven2.UI
             btnUpdate = new Button();
             txtId = new TextBox();
             label2 = new Label();
+            btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
             // 
@@ -67,6 +69,7 @@ namespace BookHeaven2.UI
             dataGridViewBooks.Size = new Size(1067, 469);
             dataGridViewBooks.TabIndex = 0;
             dataGridViewBooks.CellClick += dataGridViewBooks_CellClick;
+            dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // 
             // colId
             // 
@@ -130,6 +133,7 @@ namespace BookHeaven2.UI
             // btnAddBook
             // 
             btnAddBook.BackColor = SystemColors.InactiveCaption;
+            btnAddBook.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddBook.Location = new Point(1156, 508);
             btnAddBook.Name = "btnAddBook";
             btnAddBook.Size = new Size(75, 31);
@@ -250,6 +254,7 @@ namespace BookHeaven2.UI
             // btnUpdate
             // 
             btnUpdate.BackColor = SystemColors.Info;
+            btnUpdate.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUpdate.Location = new Point(1281, 508);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(75, 31);
@@ -275,9 +280,22 @@ namespace BookHeaven2.UI
             label2.TabIndex = 18;
             label2.Text = "Id";
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(1262, 566);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 19;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
             // BookForm
             // 
-            ClientSize = new Size(1373, 566);
+            ClientSize = new Size(1378, 625);
+            Controls.Add(btnBack);
             Controls.Add(label2);
             Controls.Add(txtId);
             Controls.Add(btnUpdate);
@@ -380,6 +398,21 @@ namespace BookHeaven2.UI
         private void dataGridViewBooks_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            var clerkForm = new ClerkForm();
+            if (userRole == UserRole.Admin)
+            {
+                adminForm.Show();
+            }
+            else
+            {
+                clerkForm.Show();
+            }
+            this.Hide();
         }
     }
 }

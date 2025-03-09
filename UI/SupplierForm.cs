@@ -57,6 +57,7 @@ namespace BookHeaven2.UI
             dataGridViewButtonColumn1 = new DataGridViewButtonColumn();
             lblBooks = new Label();
             cmbBooks = new ComboBox();
+            this.btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSuppliers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
@@ -312,9 +313,22 @@ namespace BookHeaven2.UI
             cmbBooks.TabIndex = 21;
             cmbBooks.MouseClick += cmbBooksMouseClick;
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            this.btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnBack.Location = new Point(1113, 578);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new Size(94, 37);
+            this.btnBack.TabIndex = 43;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += this.btnBack_Click;
+            // 
             // SupplierForm
             // 
-            ClientSize = new Size(1373, 566);
+            ClientSize = new Size(1373, 636);
+            Controls.Add(this.btnBack);
             Controls.Add(cmbBooks);
             Controls.Add(lblBooks);
             Controls.Add(dataGridViewBooks);
@@ -375,10 +389,12 @@ namespace BookHeaven2.UI
             {
                 LoadBooksForSupplier(supplierId);
             }
-            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewSuppliers.Columns["colDelete"].Index) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridViewSuppliers.Columns["colDelete"].Index)
+            {
                 await DeleteSupplier(supplierId);
             }
-            else{
+            else
+            {
                 var selectedRow = dataGridViewSuppliers.Rows[e.RowIndex];
                 txtId.Text = selectedRow.Cells["colId"].Value.ToString();
                 txtName.Text = selectedRow.Cells["colName"].Value.ToString();
@@ -594,7 +610,8 @@ namespace BookHeaven2.UI
             {
                 var books = await bookService.GetBooksBySupplier(id);
 
-                if (books != null) {
+                if (books != null)
+                {
                     foreach (var book in books)
                     {
                         book.SupplierId = null;
@@ -614,8 +631,11 @@ namespace BookHeaven2.UI
             }
         }
 
-
-
-
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
+        }
     }
 }

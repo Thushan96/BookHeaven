@@ -76,6 +76,7 @@ namespace BookHeaven2.UI
             txtQty = new TextBox();
             cmbStatus = new ComboBox();
             lblStatus = new Label();
+            btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOrders).BeginInit();
             SuspendLayout();
             // 
@@ -477,11 +478,24 @@ namespace BookHeaven2.UI
             lblStatus.TabIndex = 39;
             lblStatus.Text = "Status :";
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(1102, 603);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 40;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
             // OrderManagementForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1222, 594);
+            ClientSize = new Size(1222, 661);
+            Controls.Add(btnBack);
             Controls.Add(lblStatus);
             Controls.Add(cmbStatus);
             Controls.Add(txtQty);
@@ -574,5 +588,6 @@ namespace BookHeaven2.UI
         private TextBox txtQty;
         private ComboBox cmbStatus;
         private Label lblStatus;
+        private Button btnBack;
     }
 }

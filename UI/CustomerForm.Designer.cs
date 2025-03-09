@@ -9,11 +9,13 @@ namespace BookHeaven2.UI
     public partial class CustomerForm : Form
     {
         private readonly CustomerService customerService;
+        private readonly UserRole role;
 
-        public CustomerForm(CustomerService customerService)
+        public CustomerForm(CustomerService customerService,UserRole role)
         {
             InitializeComponent();
             this.customerService = customerService;
+            this.role = role;
         }
 
         private async void CustomerForm_Load(object sender, EventArgs e)
@@ -28,6 +30,10 @@ namespace BookHeaven2.UI
                     customer.Email,
                     customer.PhoneNumber
                 );
+            }
+            if (role == UserRole.SalesClerk)
+            {
+                dataGridViewCustomers.Columns["colDelete"].Visible = false;
             }
         }
 
@@ -49,5 +55,6 @@ namespace BookHeaven2.UI
         private DataGridViewTextBoxColumn colEmail;
         private DataGridViewTextBoxColumn colContact;
         private DataGridViewButtonColumn colDelete;
+        private Button btnBack;
     }
 }

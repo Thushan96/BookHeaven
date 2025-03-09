@@ -42,6 +42,7 @@ namespace BookHeaven2.UI
             cmbRole = new ComboBox();
             lblPassword = new Label();
             txtPassord = new TextBox();
+            this.btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUsers).BeginInit();
             SuspendLayout();
             // 
@@ -188,9 +189,22 @@ namespace BookHeaven2.UI
             txtPassord.Size = new Size(200, 27);
             txtPassord.TabIndex = 23;
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            this.btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnBack.Location = new Point(1118, 503);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new Size(94, 37);
+            this.btnBack.TabIndex = 42;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += this.btnBack_Click;
+            // 
             // StaffForm
             // 
             ClientSize = new Size(1373, 566);
+            Controls.Add(this.btnBack);
             Controls.Add(txtPassord);
             Controls.Add(lblPassword);
             Controls.Add(cmbRole);
@@ -314,7 +328,8 @@ namespace BookHeaven2.UI
                     return;
                 }
 
-                if (txtPassord.Text == null || txtPassord.Text == "") {
+                if (txtPassord.Text == null || txtPassord.Text == "")
+                {
                     MessageBox.Show("Please enter valid password.");
                     return;
                 }
@@ -368,7 +383,7 @@ namespace BookHeaven2.UI
                     PasswordHash = txtPassord.Text,
                     Role = selectedRole
                 };
-
+                MessageBox.Show(user.PasswordHash);
                 await userService.UpdateUserAsync(user);
 
                 MessageBox.Show("Customer updated successfully");
@@ -376,8 +391,9 @@ namespace BookHeaven2.UI
                 clearTextBoxes();
 
             }
-            catch (Exception ex) {
-                MessageBox.Show("User update failed",(ex.Message));
+            catch (Exception ex)
+            {
+                MessageBox.Show("User update failed", (ex.Message));
 
             }
         }
@@ -433,6 +449,13 @@ namespace BookHeaven2.UI
                     }
                 }
             }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            adminForm.Show();
+            this.Hide();
         }
     }
 }

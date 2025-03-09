@@ -53,7 +53,10 @@ namespace BookHeaven2.Data.Repository
             _context.Entry(existingUser).CurrentValues.SetValues(user);
             return await _context.SaveChangesAsync();
         }
-
+        private string HashPassword(string plainPassword)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(plainPassword);
+        }
         public async Task DeleteAsync(Guid userId)
         {
             var user = await _context.Users.FindAsync(userId);

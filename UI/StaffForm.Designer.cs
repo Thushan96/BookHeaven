@@ -36,5 +36,6 @@ namespace BookHeaven2.UI
         private ComboBox cmbRole;
         private Label lblPassword;
         private TextBox txtPassord;
+        private Button btnBack;
     }
 }

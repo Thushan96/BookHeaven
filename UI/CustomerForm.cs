@@ -1,5 +1,6 @@
 ﻿using BookHeaven2.Data.Models;
-using System.Windows.Forms;
+using System.Text.RegularExpressions;
+
 
 namespace BookHeaven2.UI
 {
@@ -14,7 +15,7 @@ namespace BookHeaven2.UI
         private System.Windows.Forms.TextBox txtISBN;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCustomer;
 
         protected override void Dispose(bool disposing)
         {
@@ -37,18 +38,20 @@ namespace BookHeaven2.UI
             txtName = new TextBox();
             txtEmail = new TextBox();
             txtContact = new TextBox();
-            label1 = new Label();
+            lblCustomer = new Label();
             lblConatct = new Label();
             btnUpdate = new Button();
             txtId = new TextBox();
             label2 = new Label();
             lblName = new Label();
             labelEmail = new Label();
+            btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCustomers).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewCustomers
             // 
+            dataGridViewCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCustomers.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCustomers.Columns.AddRange(new DataGridViewColumn[] { colId, colName, colEmail, colContact, colDelete });
@@ -65,28 +68,24 @@ namespace BookHeaven2.UI
             colId.MinimumWidth = 6;
             colId.Name = "colId";
             colId.ReadOnly = true;
-            colId.Width = 125;
             // 
             // colName
             // 
             colName.HeaderText = "Name";
             colName.MinimumWidth = 6;
             colName.Name = "colName";
-            colName.Width = 130;
             // 
             // colEmail
             // 
             colEmail.HeaderText = "Email";
             colEmail.MinimumWidth = 6;
             colEmail.Name = "colEmail";
-            colEmail.Width = 125;
             // 
             // colContact
             // 
             colContact.HeaderText = "Conatct No";
             colContact.MinimumWidth = 6;
             colContact.Name = "colContact";
-            colContact.Width = 125;
             // 
             // colDelete
             // 
@@ -95,7 +94,6 @@ namespace BookHeaven2.UI
             colDelete.Name = "colDelete";
             colDelete.Text = "Delete";
             colDelete.UseColumnTextForButtonValue = true;
-            colDelete.Width = 125;
             // 
             // btnAddCustomer
             // 
@@ -130,14 +128,15 @@ namespace BookHeaven2.UI
             txtContact.Size = new Size(200, 27);
             txtContact.TabIndex = 5;
             // 
-            // label1
+            // lblCustomer
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(469, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(164, 20);
-            label1.TabIndex = 9;
-            label1.Text = "Customer Management";
+            lblCustomer.AutoSize = true;
+            lblCustomer.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCustomer.Location = new Point(469, 18);
+            lblCustomer.Name = "lblCustomer";
+            lblCustomer.Size = new Size(211, 25);
+            lblCustomer.TabIndex = 9;
+            lblCustomer.Text = "Customer Management";
             // 
             // lblConatct
             // 
@@ -197,16 +196,29 @@ namespace BookHeaven2.UI
             labelEmail.Text = "Email";
             labelEmail.Click += labelEmail_Click;
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(1232, 505);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 21;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
             // CustomerForm
             // 
             ClientSize = new Size(1373, 566);
+            Controls.Add(btnBack);
             Controls.Add(labelEmail);
             Controls.Add(lblName);
             Controls.Add(label2);
             Controls.Add(txtId);
             Controls.Add(btnUpdate);
             Controls.Add(lblConatct);
-            Controls.Add(label1);
+            Controls.Add(lblCustomer);
             Controls.Add(txtContact);
             Controls.Add(txtEmail);
             Controls.Add(txtName);
@@ -290,30 +302,62 @@ namespace BookHeaven2.UI
 
         }
 
-        private async void btnAddClick(object sender, EventArgs e)
-        {
-            var customer = new Customer
+
+        private bool ValidateInputs()
             {
-                Id = Guid.NewGuid(),
-                Name = txtName.Text,
-                Email = txtEmail.Text,
-                PhoneNumber = txtContact.Text,
-            };
+                if (string.IsNullOrWhiteSpace(txtName.Text))
+                {
+                    MessageBox.Show("Name cannot be empty", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtName.Focus();
+                    return false;
+                }
 
-            try
-            {
-                await customerService.AddCustomer(customer);
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                if (!Regex.IsMatch(txtEmail.Text, emailPattern))
+                {
+                    MessageBox.Show("Invalid Email Format", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtEmail.Focus();
+                    return false;
+                }
 
-                CustomerForm_Load(sender, e);
+                string contactPattern = @"^\d{10}$";
+                if (!Regex.IsMatch(txtContact.Text, contactPattern))
+                {
+                    MessageBox.Show("Contact Number must be exactly 10 digits", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtContact.Focus();
+                    return false;
+                }
 
-                MessageBox.Show("Customer added successfully!");
-                clearTextBoxes();
+                return true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding Customer: {ex.Message}");
-            }
-        }
+
+
+            private async void btnAddClick(object sender, EventArgs e)
+                {
+                    if (!ValidateInputs()) return; 
+
+                    var customer = new Customer
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = txtName.Text,
+                        Email = txtEmail.Text,
+                        PhoneNumber = txtContact.Text,
+                    };
+
+                    try
+                    {
+                        await customerService.AddCustomer(customer);
+
+                        CustomerForm_Load(sender, e);
+
+                        MessageBox.Show("Customer added successfully!");
+                        clearTextBoxes();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error adding Customer: {ex.Message}");
+                    }
+                }
 
         private async void btnUpdateClick(object sender, EventArgs e)
         {
@@ -322,6 +366,8 @@ namespace BookHeaven2.UI
                 MessageBox.Show("Please select a Customer to update");
                 return;
             }
+            if (!ValidateInputs()) return;
+
             var customer = new Customer
             {
                 Id = Guid.Parse(txtId.Text),
@@ -346,8 +392,6 @@ namespace BookHeaven2.UI
 
         private async void DeleteCustomer(Guid id)
         {
-     
-
             if (id != null)
             {
                 try
@@ -391,6 +435,19 @@ namespace BookHeaven2.UI
 
         }
 
-       
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            var clerkForm = new ClerkForm();
+            if (role == UserRole.Admin)
+            {
+                adminForm.Show();
+            }
+            else
+            {
+                clerkForm.Show();
+            }
+            this.Hide();
+        }
     }
 }

@@ -9,11 +9,13 @@ namespace BookHeaven2.UI
     public partial class SalesForm : Form
     {
         private readonly OrderService orderService;
+        private readonly UserRole role;
 
-        public SalesForm(OrderService orderService)
+        public SalesForm(OrderService orderService, UserRole role)
         {
             InitializeComponent();
             this.orderService = orderService;
+            this.role = role;
         }
 
         private Label label2;
@@ -46,5 +48,6 @@ namespace BookHeaven2.UI
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private Button btnBack;
     }
 }

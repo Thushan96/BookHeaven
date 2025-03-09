@@ -52,7 +52,8 @@ namespace BookHeaven2.Services
         public async Task<int?> UpdateUserAsync(AppUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
-            if (user.PasswordHash != null || user.PasswordHash != "") {
+            if (!string.IsNullOrEmpty(user.PasswordHash))
+            {
                 user.PasswordHash = HashPassword(user.PasswordHash);
             }
 

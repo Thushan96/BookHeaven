@@ -55,6 +55,7 @@ namespace BookHeaven2.UI
             cmbStatus = new ComboBox();
             lblDiscount = new Label();
             txtDiscount = new TextBox();
+            btnBack = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewItems).BeginInit();
             SuspendLayout();
@@ -195,7 +196,6 @@ namespace BookHeaven2.UI
             dataGridViewItems.RowHeadersWidth = 51;
             dataGridViewItems.Size = new Size(554, 199);
             dataGridViewItems.TabIndex = 1;
-            dataGridViewItems.CellContentClick += dataGridViewBooks_CellContentClick_1;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -300,9 +300,22 @@ namespace BookHeaven2.UI
             txtDiscount.Size = new Size(200, 27);
             txtDiscount.TabIndex = 23;
             // 
+            // btnBack
+            // 
+            btnBack.BackColor = SystemColors.GradientInactiveCaption;
+            btnBack.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(1242, 514);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 41;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
+            // 
             // SalesForm
             // 
-            ClientSize = new Size(1373, 566);
+            ClientSize = new Size(1373, 573);
+            Controls.Add(btnBack);
             Controls.Add(txtDiscount);
             Controls.Add(lblDiscount);
             Controls.Add(cmbStatus);
@@ -451,38 +464,6 @@ namespace BookHeaven2.UI
 
         }
 
-        private void labelEmail_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridViewBooks_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private async Task LoadBooks()
-        {
-            //var books = await bookService.GetAllBooks();
-            //cmbBooks.DataSource = books;
-            //cmbBooks.DisplayMember = "Title";
-            //cmbBooks.ValueMember = "Id";
-            //cmbBooks.SelectedIndex = -1;
-        }
-
-
-
-        private async void cmbBooksMouseClick(object sender, MouseEventArgs e)
-        {
-            await LoadBooks();
-        }
-
-
         private async Task LoadOrders()
         {
             dataGridViewItems.Visible = false;
@@ -502,33 +483,6 @@ namespace BookHeaven2.UI
                     order.Status
                 );
             }
-        }
-
-        private async Task DeleteSupplier(Guid id)
-        {
-            //var supplier = await supplierService.GetSupplierByIdAsync(id);
-            //if (supplier != null)
-            //{
-            //    var books = await bookService.GetBooksBySupplier(id);
-
-            //    if (books != null) {
-            //        foreach (var book in books)
-            //        {
-            //            book.SupplierId = null;
-            //            await bookService.UpdateBook(book);
-            //        }
-            //    }
-            //    await supplierService.DeleteSupplierAsync(id);
-
-            //    MessageBox.Show("Supplier deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //    await LoadSuppliers();
-            //    ClearTextBoxes();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Supplier not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
 
         private async void dataGridViewSales_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -602,5 +556,19 @@ namespace BookHeaven2.UI
             }
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminForm();
+            var clerkForm = new ClerkForm();
+            if (role == UserRole.Admin)
+            {
+                adminForm.Show();
+            }
+            else
+            {
+                clerkForm.Show();
+            }
+            this.Hide();
+        }
     }
 }
