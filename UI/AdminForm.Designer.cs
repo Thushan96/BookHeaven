@@ -36,6 +36,7 @@
             btnSupplier = new Button();
             btnDashboard = new Button();
             btnSignOut = new Button();
+            lblTabs = new Label();
             SuspendLayout();
             // 
             // btnStaff
@@ -134,12 +135,23 @@
             btnSignOut.UseVisualStyleBackColor = false;
             btnSignOut.Click += btnSignOutClick;
             // 
+            // lblTabs
+            // 
+            lblTabs.AutoSize = true;
+            lblTabs.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTabs.Location = new Point(554, 26);
+            lblTabs.Name = "lblTabs";
+            lblTabs.Size = new Size(61, 31);
+            lblTabs.TabIndex = 8;
+            lblTabs.Text = "Tabs";
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(1264, 462);
+            Controls.Add(lblTabs);
             Controls.Add(btnSignOut);
             Controls.Add(btnDashboard);
             Controls.Add(btnSupplier);
@@ -151,6 +163,7 @@
             Name = "AdminForm";
             Text = "AdminForm";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -163,5 +176,6 @@
         private Button btnSupplier;
         private Button btnDashboard;
         private Button btnSignOut;
+        private Label lblTabs;
     }
 }

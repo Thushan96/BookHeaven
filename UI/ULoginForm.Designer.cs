@@ -8,7 +8,6 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblError;
 
-        // Dispose method to clean up any resources
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -37,7 +36,6 @@
             txtUsername.Size = new Size(391, 27);
             txtUsername.TabIndex = 0;
             txtUsername.Text = "Username";
-            txtUsername.TextChanged += txtEmail_TextChanged;
             // 
             // txtPassword
             // 
@@ -79,7 +77,6 @@
             lblwlcome.TabIndex = 4;
             lblwlcome.TabStop = true;
             lblwlcome.Text = "Book Haven";
-            lblwlcome.LinkClicked += linkLabel1_LinkClicked;
             // 
             // lblwelcme2
             // 
@@ -91,7 +88,6 @@
             lblwelcme2.Size = new Size(313, 25);
             lblwelcme2.TabIndex = 5;
             lblwelcme2.Text = "Wel come to the  paradise of books";
-            lblwelcme2.Click += lblwelcme2_Click;
             // 
             // pictureBox1
             // 
@@ -101,7 +97,6 @@
             pictureBox1.Size = new Size(599, 447);
             pictureBox1.TabIndex = 7;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // ULoginForm
             // 
@@ -116,7 +111,6 @@
             Controls.Add(txtUsername);
             Name = "ULoginForm";
             Text = "Login";
-            Load += ULoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

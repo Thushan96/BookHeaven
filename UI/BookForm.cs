@@ -15,7 +15,7 @@ namespace BookHeaven2.UI
         private System.Windows.Forms.TextBox txtISBN;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblBook;
 
         protected override void Dispose(bool disposing)
         {
@@ -44,7 +44,7 @@ namespace BookHeaven2.UI
             txtISBN = new TextBox();
             txtPrice = new TextBox();
             txtQuantity = new TextBox();
-            label1 = new Label();
+            lblBook = new Label();
             lblTitle = new Label();
             lblAuthor = new Label();
             lblGenre = new Label();
@@ -60,6 +60,7 @@ namespace BookHeaven2.UI
             // 
             // dataGridViewBooks
             // 
+            dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewBooks.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colAuthor, colGenre, colISBN, colPrice, colQuantity, colDelete });
@@ -69,7 +70,6 @@ namespace BookHeaven2.UI
             dataGridViewBooks.Size = new Size(1067, 469);
             dataGridViewBooks.TabIndex = 0;
             dataGridViewBooks.CellClick += dataGridViewBooks_CellClick;
-            dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // 
             // colId
             // 
@@ -77,49 +77,42 @@ namespace BookHeaven2.UI
             colId.MinimumWidth = 6;
             colId.Name = "colId";
             colId.ReadOnly = true;
-            colId.Width = 125;
             // 
             // colTitle
             // 
             colTitle.HeaderText = "Title";
             colTitle.MinimumWidth = 6;
             colTitle.Name = "colTitle";
-            colTitle.Width = 130;
             // 
             // colAuthor
             // 
             colAuthor.HeaderText = "Author";
             colAuthor.MinimumWidth = 6;
             colAuthor.Name = "colAuthor";
-            colAuthor.Width = 125;
             // 
             // colGenre
             // 
             colGenre.HeaderText = "Genre";
             colGenre.MinimumWidth = 6;
             colGenre.Name = "colGenre";
-            colGenre.Width = 125;
             // 
             // colISBN
             // 
             colISBN.HeaderText = "ISBN";
             colISBN.MinimumWidth = 6;
             colISBN.Name = "colISBN";
-            colISBN.Width = 125;
             // 
             // colPrice
             // 
             colPrice.HeaderText = "Price";
             colPrice.MinimumWidth = 6;
             colPrice.Name = "colPrice";
-            colPrice.Width = 125;
             // 
             // colQuantity
             // 
             colQuantity.HeaderText = "Quantity";
             colQuantity.MinimumWidth = 6;
             colQuantity.Name = "colQuantity";
-            colQuantity.Width = 135;
             // 
             // colDelete
             // 
@@ -128,7 +121,6 @@ namespace BookHeaven2.UI
             colDelete.Name = "colDelete";
             colDelete.Text = "Delete";
             colDelete.UseColumnTextForButtonValue = true;
-            colDelete.Width = 125;
             // 
             // btnAddBook
             // 
@@ -187,14 +179,15 @@ namespace BookHeaven2.UI
             txtQuantity.TabIndex = 8;
             txtQuantity.TextChanged += txtQuantity_TextChanged;
             // 
-            // label1
+            // lblBook
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(469, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(135, 20);
-            label1.TabIndex = 9;
-            label1.Text = "Book Management";
+            lblBook.AutoSize = true;
+            lblBook.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblBook.Location = new Point(469, 18);
+            lblBook.Name = "lblBook";
+            lblBook.Size = new Size(174, 25);
+            lblBook.TabIndex = 9;
+            lblBook.Text = "Book Management";
             // 
             // lblTitle
             // 
@@ -305,7 +298,7 @@ namespace BookHeaven2.UI
             Controls.Add(lblGenre);
             Controls.Add(lblAuthor);
             Controls.Add(lblTitle);
-            Controls.Add(label1);
+            Controls.Add(lblBook);
             Controls.Add(txtQuantity);
             Controls.Add(txtPrice);
             Controls.Add(txtISBN);

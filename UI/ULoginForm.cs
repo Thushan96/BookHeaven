@@ -80,40 +80,5 @@ namespace BookHeaven2.UI
             }
 
         }
-
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
-        private void lblwelcme2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ULoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogin_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

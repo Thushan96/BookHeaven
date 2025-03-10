@@ -33,6 +33,7 @@
             btnCustomer = new Button();
             btnBook = new Button();
             btnSignOut = new Button();
+            lblTabs = new Label();
             SuspendLayout();
             // 
             // btnOrders
@@ -95,12 +96,23 @@
             btnSignOut.UseVisualStyleBackColor = false;
             btnSignOut.Click += btnSignOut_Click;
             // 
+            // lblTabs
+            // 
+            lblTabs.AutoSize = true;
+            lblTabs.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTabs.Location = new Point(562, 49);
+            lblTabs.Name = "lblTabs";
+            lblTabs.Size = new Size(61, 31);
+            lblTabs.TabIndex = 10;
+            lblTabs.Text = "Tabs";
+            // 
             // ClerkForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(1204, 450);
+            Controls.Add(lblTabs);
             Controls.Add(btnSignOut);
             Controls.Add(btnBook);
             Controls.Add(btnCustomer);
@@ -109,6 +121,7 @@
             Name = "ClerkForm";
             Text = "ClerkForm";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -118,5 +131,6 @@
         private Button btnCustomer;
         private Button btnBook;
         private Button btnSignOut;
+        private Label lblTabs;
     }
 }
