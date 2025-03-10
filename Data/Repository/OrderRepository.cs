@@ -127,10 +127,10 @@ namespace BookHeaven2.Data.Repository
         public async Task<IEnumerable<Order>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate)
         {
             return await _context.Orders
-                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
-                .Include(o => o.Items)
-                    .ThenInclude(oi => oi.Book)
-                .ToListAsync();
+              .Where(o => o.OrderDate.Date >= startDate.Date && o.OrderDate.Date <= endDate.Date) 
+              .Include(o => o.Items)
+                  .ThenInclude(oi => oi.Book)
+              .ToListAsync();
         }
 
         public async Task<IEnumerable<BookSales>> GetBestSellingBooksAsync()

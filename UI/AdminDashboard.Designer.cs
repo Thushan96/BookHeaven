@@ -205,6 +205,7 @@
             btnDownload.Text = "Download";
             btnDownload.UseVisualStyleBackColor = false;
             btnDownload.Click += btnDownload_Click;
+            btnDownload.Visible = false;
             // 
             // AdminDashboard
             // 
